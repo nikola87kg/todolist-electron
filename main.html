@@ -1,0 +1,25 @@
+<head>
+
+</head>
+
+<body>
+    <h1>My Todos</h1>
+    <ul></ul>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+        const ulList = document.querySelector('ul');
+
+        ipcRenderer.on( 'todo_add', (event, todoValue) => {
+            const li = document.createElement('li');
+            const text = document.createTextNode(todoValue);
+            li.appendChild(text);
+            ulList.appendChild(li)
+        } )
+
+        ipcRenderer.on( 'todo_clear', () => {
+            ulList.innerHTML = '';
+        } )
+    </script>
+</body>
